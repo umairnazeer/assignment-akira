@@ -69,12 +69,10 @@ describe('Signup', () => {
             ProviderDesjardinPage.clickContinueBtn();
             EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
             expect(browser.getUrl()).to.contain('/eligible/desjardins');
-            expect(EligibleDesjardinPage.getMessage(2)).to.equal(Message.eligibleMessageDesjardins(2));
             EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
-            expect(EligibleDesjardinPage.getMessage(3)).to.equal(Message.eligibleMessageDesjardins(3));
-            EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
-            expect(EligibleDesjardinPage.getMessage(4)).to.equal(Message.eligibleMessageDesjardins(4));
+            expect(EligibleDesjardinPage.getMessage()).to.equal(Message.eligibleMessageDesjardins());
             EligibleDesjardinPage.sendActivationLinkBtn.waitForDisplayed(5000, undefined, 'unable to locate element');
+            // avoiding to click on the "Send me my activation link" button, instead check the button text
             expect(EligibleDesjardinPage.getBtnText()).to.equal(Message.eligibleDesjardinsBtnText());
         });
     });
@@ -116,6 +114,7 @@ describe('Signup', () => {
                 SignupPage.open();
                 SignupPage.enterEmail('');
                 expect(SignupPage.btnIsDisabled.isDisplayed()).to.be.false;
+                console.log("THE PROCESS IS", process);
             });
         });
     });

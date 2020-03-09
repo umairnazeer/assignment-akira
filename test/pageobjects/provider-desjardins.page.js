@@ -3,10 +3,10 @@ import Page from './page'
 class ProviderDesjardinPage extends Page {
 
     get policyNumber() { return $('#policyInput') }
-    get certificateNumber() { return $('#certificateInput')}
-    get continueBtn() { return $('.CardButton.primary')}
+    get certificateNumber() { return $('#certificateInput') }
+    get continueBtn() { return $('.CardButton.primary') }
 
-    enterCredentials(policyNum, certNum ) {
+    enterCredentials(policyNum, certNum) {
         this.policyNumber.addValue(policyNum)
         this.certificateNumber.addValue(certNum)
     }

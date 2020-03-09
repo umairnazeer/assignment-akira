@@ -13,12 +13,6 @@ class provincePage extends Page {
     clickNextBtn() {
         this.nextBtn.click()
     }
-
-    // clickNextBtn() {
-    //     this.nextBtn.click()
-    // }
-    
-
 }
 
 export default new provincePage()
