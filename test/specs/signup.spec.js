@@ -5,35 +5,19 @@ import EligibilityPage from '../pageobjects/eligibility.page';
 import BenefitProviderPage from '../pageobjects/benefit-provider.page';
 import ProviderDesjardinPage from '../pageobjects/provider-desjardins.page';
 import NotEligibleDesjardinPage from '../pageobjects/not-eligible-desjardins.page';
+import EligibleDesjardinPage from '../pageobjects/eligible-desjardins.page';
 import Message from '../data/messages';
 
 import { expect } from 'chai';
 
 describe('Signup', () => {
-    describe('Page Visibility Test', () => {
-        it('the url should contain /email', () => {
-            SignupPage.open();
-            const url = browser.getUrl();
-            expect(url).to.contain('email');
+    let policyNumber, certificateNumber;
+    describe('Flow 1: A user registers with invalid information', () => {
+        beforeAll(function () {
+            policyNumber = 12345;
+            certificateNumber = 12345;
         });
-        it('should have the right title', () => {
-            const title = browser.getTitle();
-            expect(title).to.equal('Akira - Signup');
-        });
-        it('verify that the logo is visible', () => {
-            const isDisplayed = SignupPage.logo.isDisplayed();
-            expect(isDisplayed).to.be.true;
-        });
-        it('Card title is present', () => {
-            browser.pause(5000);
-            const cardTitle = SignupPage.getCardTitle();
-            console.log("TITLE YE HY BC", cardTitle);
-            console.log(Message.signupPageCardTitle());
-            expect(cardTitle).to.equal(Message.signupPageCardTitle());
-        });
-    });
-    describe('A user registers with invalid information', () => {
-        it('should not be able to register', () => {
+        it('should NOT be able to register', () => {
             SignupPage.open();
             SignupPage.enterEmail('83.mumair@gmail.com');
             SignupPage.clickNextBtn();
@@ -49,7 +33,7 @@ describe('Signup', () => {
             BenefitProviderPage.optionsList.waitForDisplayed(5000, undefined, 'unable to locate element');
             BenefitProviderPage.selectOption(1);
             expect(browser.getUrl()).to.contain('/verification-info/desjardins');
-            ProviderDesjardinPage.enterCredentials(12345, 12345);
+            ProviderDesjardinPage.enterCredentials(policyNumber, certificateNumber);
             ProviderDesjardinPage.clickContinueBtn();
             NotEligibleDesjardinPage.notEligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
             expect(browser.getUrl()).to.contain('/not_eligible/desjardins');
@@ -60,7 +44,79 @@ describe('Signup', () => {
             expect(browser.getUrl()).to.contain('/verification-info/desjardins');
         });
     });
-    describe('', () => {
+    describe('Flow 2: A user registers with valid information', () => {
+        beforeAll(function () {
+            policyNumber = 'CN34343';
+            certificateNumber = 'qatest001';
+        });
+        it('should be able to register', () => {
+            SignupPage.open();
+            SignupPage.enterEmail('83.mumair@gmail.com');
+            SignupPage.clickNextBtn();
+            ProvincePage.provinceList.waitForExist(5000, undefined, 'unable to locate element');
+            expect(browser.getUrl()).to.contain('/province');
+            ProvincePage.selectProvince("Ontario");
+            ProvincePage.clickNextBtn();
+            expect(browser.getUrl()).to.contain('/account_type');
+            AccountTypePage.selectOption(1);
+            expect(browser.getUrl()).to.contain('/verify_eligibility_with');
+            EligibilityPage.selectOption(2);
+            expect(browser.getUrl()).to.contain('/select_benefit_provider');
+            BenefitProviderPage.optionsList.waitForDisplayed(5000, undefined, 'unable to locate element');
+            BenefitProviderPage.selectOption(1);
+            expect(browser.getUrl()).to.contain('/verification-info/desjardins');
+            ProviderDesjardinPage.enterCredentials(policyNumber, certificateNumber);
+            ProviderDesjardinPage.clickContinueBtn();
+            EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
+            expect(browser.getUrl()).to.contain('/eligible/desjardins');
+            expect(EligibleDesjardinPage.getMessage(2)).to.equal(Message.eligibleMessageDesjardins(2));
+            EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
+            expect(EligibleDesjardinPage.getMessage(3)).to.equal(Message.eligibleMessageDesjardins(3));
+            EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
+            expect(EligibleDesjardinPage.getMessage(4)).to.equal(Message.eligibleMessageDesjardins(4));
+            EligibleDesjardinPage.sendActivationLinkBtn.waitForDisplayed(5000, undefined, 'unable to locate element');
+            expect(EligibleDesjardinPage.getBtnText()).to.equal(Message.eligibleDesjardinsBtnText());
+        });
+    });
 
+    /* 
+    some other tests
+        Best way of doing Visual testing is to use tools like apliTools
+        Below are some tests to verify the visibility of some UI components
+    */
+    describe('Page Visibility Test', () => {
+        it('the url should contain /email', () => {
+            SignupPage.open();
+            const url = browser.getUrl();
+            expect(url).to.contain('email');
+        });
+        it('should have the right title', () => {
+            const title = browser.getTitle();
+            expect(title).to.equal('Akira - Signup');
+        });
+        it('verify that the logo is visible', () => {
+            const isDisplayed = SignupPage.logo.isDisplayed();
+            expect(isDisplayed).to.be.true;
+        });
+        it('card title is present', () => {
+            browser.pause(1000);
+            const cardTitle = SignupPage.getCardTitle();
+            expect(cardTitle).to.equal(Message.signupPageCardTitle());
+        });
+    });
+    // some form validations
+    describe('Form Validations:', () => {
+        describe('Next button should be disabled', () => {
+            it('when wrong email format is provided', () => {
+                SignupPage.open();
+                SignupPage.enterEmail('83.mumair@g');
+                expect(SignupPage.btnIsDisabled.isDisplayed()).to.be.false;
+            });
+            it('when email field is empty', () => {
+                SignupPage.open();
+                SignupPage.enterEmail('');
+                expect(SignupPage.btnIsDisabled.isDisplayed()).to.be.false;
+            });
+        });
     });
 });

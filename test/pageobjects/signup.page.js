@@ -4,8 +4,9 @@ class SignupPage extends Page {
 
     get email() { return $('#emailInput') }
     get nextBtn() { return $('.CardButton.primary') }
-    get logo() { return $('img[class="logo"]') }
+    get logo() { return $('.AkiraHeader>.logo') }
     get cardTitle() {return $('.Card>div:nth-child(1)>div')}
+    get btnIsDisabled() { return $('.CardButton.primary[disabled]')}
 
     open() {
         // super.open('email')
