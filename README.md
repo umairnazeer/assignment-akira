@@ -12,12 +12,13 @@ WebdriverIO is a custom implementation for selenium's W3C webdriver API. It is w
 - The test runner also comes with a variety of hooks that allow us to interfere into the test process in order to e.g. take screenshots if an error occurs or modify the test procedure according to a previous test result.
 - It can be integrated with browserstack, Applitools, Appium, SauceLab, Docker and many other popular tools. More on tools and services can be found [here](https://webdriver.io/docs/gettingstarted.html)
 
-## Installation:
-1. This project is tested on Node **v13.10.1**. While earlier versions of node may be compatible, but they have not been verified. Install NodeJS from the official site - https://nodejs.org/en/ take the LTS version based on your Operating system. Please make sure you install NodeJS globally.
-2. Install all dependencies by typing: `npm install`
+## Getting Started
+To get this project up and running please follow the below steps:
 
-## Runing test
-1. Run tests by typing: `npm run test` or `npm test`
+- Install NodeJS v8.11.2 or higher on your local machine
+- Clone this project
+- Run "npm install" in any terminal to install necessary packages and libraries
+- Run "npm run test"
 
 ### Jasmine JavaScript framework
 The tests are written in Jasmine framework. More about Jasmine can be found at https://jasmine.github.io/
