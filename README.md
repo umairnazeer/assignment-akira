@@ -32,7 +32,7 @@ Test reporter, that prints detailed results to console.
 **Allure**
 The Allure Reporter creates Allure test reports which is an HTML generated website with all necessary information to debug your test results and take a look on error screenshots.
 
-To generate and view an allure report locally, run `allure generate allure-results && allure open`. A typical Allure report will look like this
+To generate and view an allure report locally, run `npm run allure-report`. A typical Allure report will look like this
 
 ![ScreenShot](images/allure-report-screenshot.png)
 
