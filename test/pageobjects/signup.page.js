@@ -8,24 +8,35 @@ class SignupPage extends Page {
     get cardTitle() { return $('.Card>div:nth-child(1)>div') }
     get btnIsDisabled() { return $('.CardButton.primary[disabled]') }
 
+    /**
+     * @desc opens the page in the browser. 
+     */
     open() {
-        // super.open('email')
         browser.url('email')
     }
 
+    /**
+     * @desc this function inputs email address on signup page
+     * @param {string} emailAddress 
+     * @example abc@example.com
+     */
     enterEmail(emailAddress) {
         this.email.addValue(emailAddress)
     }
 
+    /**
+     * @desc this function clicks next button
+     */
     clickNextBtn() {
         this.nextBtn.click()
     }
 
+    /**
+     * @desc this function gets the heading text above the input field
+     */
     getCardTitle() {
         return this.cardTitle.getText();
     }
-
-
 }
 
 export default new SignupPage()

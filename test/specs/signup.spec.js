@@ -43,6 +43,12 @@ describe('Signup', () => {
             NotEligibleDesjardinPage.clickStartAgainBtn();
             expect(browser.getUrl()).to.contain('/verification-info/desjardins');
         });
+        it('can re-enter wrong policy/certificate details to try again', () => {
+            ProviderDesjardinPage.enterCredentials(policyNumber, certificateNumber);
+            ProviderDesjardinPage.clickContinueBtn();
+            NotEligibleDesjardinPage.notEligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
+            expect(browser.getUrl()).to.contain('/not_eligible/desjardins');
+        })
     });
     describe('Flow 2: A user registers with valid information', () => {
         beforeAll(function () {
@@ -72,7 +78,10 @@ describe('Signup', () => {
             EligibleDesjardinPage.eligibleMessage.waitForDisplayed(5000, undefined, 'unable to locate element');
             expect(EligibleDesjardinPage.getMessage()).to.equal(Message.eligibleMessageDesjardins());
             EligibleDesjardinPage.sendActivationLinkBtn.waitForDisplayed(5000, undefined, 'unable to locate element');
-            // avoiding to click on the "Send me my activation link" button, instead check the button text
+            /**
+             *  @since we don't want to burn the certificate credentials,
+             *  so we are avoiding to click on the "Send me my activation link" button, instead check the button text
+             */
             expect(EligibleDesjardinPage.getBtnText()).to.equal(Message.eligibleDesjardinsBtnText());
         });
     });
