@@ -25,12 +25,12 @@ The tests are written in Jasmine framework. More about Jasmine can be found at h
 Tests are placed in `*.specs.js` files in the `/test/specs/` directory.
 
 ## Reporters
-WebdriverIO uses several different types of test reporters to show test results (pass/failure). This project is using 'Spec' and 'Allure' for reporting.
+WebdriverIO uses several different types of test reporters to show test results (pass/failure). This project is using **Spec** and **Allure** for reporting.
 
-**Spec**
+**Spec:**
 Test reporter, that prints detailed results to console.
 
-**Allure**
+**Allure:**
 The Allure Reporter creates Allure test reports which is an HTML generated website with all necessary information to debug your test results and take a look on error screenshots.
 
 To generate and view an allure report locally, run `npm run allure-report`. A typical Allure report will look like this
