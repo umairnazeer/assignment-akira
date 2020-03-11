@@ -1,6 +1,6 @@
 # WebdriverIO e2e tests
 
-## Why WebdriverIO:
+## Why WebdriverIO
 WebdriverIO is a custom implementation for selenium's W3C webdriver API. It is written in Javascript and packaged into 'npm' and runs on Node.js.
 
 **Main Features of WebdriverIO:**
@@ -20,7 +20,7 @@ To get this project up and running please follow the below steps:
 - Run "npm install" in any terminal to install necessary packages and libraries
 - Run "npm run test"
 
-### Jasmine JavaScript framework
+## Jasmine JavaScript framework
 The tests are written in Jasmine framework. More about Jasmine can be found at https://jasmine.github.io/
 Tests are placed in `*.specs.js` files in the `/test/specs/` directory.
 
