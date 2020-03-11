@@ -6,8 +6,8 @@ WebdriverIO is a leading automation framework that allows custom implementation 
 The primary reasons for using WebdriverIO for this project includes:
 
 - Simple and easy to use syntax;
-- The ability to use Webdriver specification, with easy integration to Appium (mobile automation) allowing to run tests on brower, deskptop and mobile;
-- It has integrated test runner which helps us to write asynchronous commands in a synchronous way so that we don’t need to care about how to handle a Promise to avoid racing conditions;
+- The ability to use Webdriver specification, with easy integration to Appium (mobile automation) allowing to run tests on brower, desktop and mobile;
+- It uses an integrated test runner that helps us to write asynchronous commands in a synchronous way so that we don’t need to care about how to handle a Promise to avoid racing conditions;
 - The 'wdio setup wizard' allows easy setup for the project;
 - Ability to write custom (javascript) functions;
 - Test runner makes it easy to customize and modify test based on previous test results (i.e. taking a screenshot when a test fails);
